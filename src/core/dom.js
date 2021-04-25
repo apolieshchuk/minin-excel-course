@@ -20,8 +20,30 @@ class Dom {
     return this;
   }
 
+  get data() {
+    return this.$el.dataset;
+  }
+
+  getAttr(attr) {
+    return this.$el.getAttribute(attr);
+  }
+
   findByDataAttr(dataAttrName, dataAttrValue) {
-    return this.$el.querySelectorAll(`[${dataAttrName}='${dataAttrValue}']`);
+    return Array.from(this.$el.querySelectorAll(`[${dataAttrName}='${dataAttrValue}']`))
+        .map((el) => $(el));
+  }
+
+  findParentByDataAttr(dataAttrName, dataAttrValue) {
+    return $(this.$el.closest(`[${dataAttrName}='${dataAttrValue}']`));
+  }
+
+  getCoords() {
+    return this.$el.getBoundingClientRect();
+  }
+
+  css(styles = {}) {
+    Object.keys(styles).forEach((styleName) => this.$el.style[styleName] = styles[styleName]);
+    return this;
   }
 
   on(eventType, callback) {

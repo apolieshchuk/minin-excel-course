@@ -8,7 +8,7 @@ function createCell(content, colName) {
 }
 
 function createCol(name) {
-  return `<div class="column" data-col-name="${name}"> 
+  return `<div class="column" data-type="resizable" data-col-name="${name}"> 
             ${name} 
             <div class="col-resize" data-resize="col"></div>
           </div>
@@ -17,7 +17,7 @@ function createCol(name) {
 
 function createRow(rowNumber, rowData) {
   return `
-    <div class="row" data-row="${rowNumber}">
+    <div class="row" data-type="resizable" data-row="${rowNumber}">
         <div class="row-info">
             ${rowNumber}
             ${rowNumber ? '<div class="row-resize" data-resize="row"></div>' : ''}
