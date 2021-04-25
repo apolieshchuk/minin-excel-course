@@ -16,6 +16,7 @@ const jsLoaders = () => {
       loader: 'babel-loader', // for compatible in old browsers
       options: {
         presets: ['@babel/preset-env'],
+        plugins: ['@babel/plugin-proposal-class-properties'],
       },
     },
   ];
