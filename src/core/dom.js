@@ -20,6 +20,10 @@ class Dom {
     return this;
   }
 
+  findByDataAttr(dataAttrName, dataAttrValue) {
+    return this.$el.querySelectorAll(`[${dataAttrName}='${dataAttrValue}']`);
+  }
+
   on(eventType, callback) {
     this.$el.addEventListener(eventType, callback);
   }
