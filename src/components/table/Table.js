@@ -37,6 +37,9 @@ export class Table extends ExcelComponent {
     const parentKey = $parent.data.colName;
     const resizeType = $resizer.data.resize;
 
+    const resizerLongerStyle = resizeType === 'col' ? 'bottom' : 'right';
+    $resizer.css({opacity: 1, [resizerLongerStyle]: '-5000px'});
+
     const coords = $parent.getCoords();
 
     // get resized column objects
@@ -44,22 +47,27 @@ export class Table extends ExcelComponent {
       ? this.$root.findByDataAttr('data-col-name', parentKey)
       : [$parent];
 
+    let value;
     document.onmousemove = (e) => {
       // const delta = e.pageX - coords.right; // zamukanie!
       const delta = resizeType === 'col' ? e.pageX - coords.right : e.pageY - coords.bottom;
-      const value = resizeType === 'col' ? coords.width + delta : coords.height + delta;
+      value = resizeType === 'col' ? coords.width + delta : coords.height + delta;
+
+      const changedProp = resizeType === 'col' ? 'right' : 'bottom';
+      $resizer.css({[changedProp]: -delta + 'px'});
+    };
+
+    document.onmouseup = () => {
+      // set resizer in new position
+      $resizer.css({opacity: 0, bottom: 0, right: 0});
 
       resizedObjects.forEach((el) => {
         const changedProp = resizeType === 'col' ? 'width' : 'height';
         el.css({[changedProp]: `${value}px`});
       });
-    };
 
-    // 189 ms  Scripting
-    // 1927 ms  Rendering
-
-    document.onmouseup = () => {
       document.onmousemove = null;
+      document.onmouseup = null;
     };
   }
 

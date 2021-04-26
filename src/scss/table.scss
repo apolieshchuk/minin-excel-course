@@ -33,11 +33,12 @@
       bottom: 0;
       right: 0;
       opacity: 0;
+      z-index: 1;
       height: 4px;
       background: $primary-color;
 
       &:hover {
-        opacity: 1;
+        opacity: 1 !important;
         cursor: row-resize;
       }
     }
@@ -67,10 +68,11 @@
       opacity: 0;
       right: 0;
       width: 4px;
+      z-index: 1;
       background: $primary-color;
 
       &:hover {
-        opacity: 1;
+        opacity: 1 !important;
         cursor: col-resize;
       }
     }
